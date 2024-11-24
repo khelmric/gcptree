@@ -39,6 +39,9 @@ This script generates a visual representation of Google Cloud resources (Organiz
 ## Usage
 `gcptree.sh` allows you to display the hierarchical structure of Google Cloud resources starting from an **Organization** or **Folder**.
 
+### Cloud Shell Tutorial
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://ssh.cloud.google.com/cloudshell/open?cloudshell_git_repo=https://github.com/khelmric/gcptree&cloudshell_tutorial=tutorial.md)
+
 ### Basic Syntax
 ```bash
 ./gcptree.sh <ORGANIZATION_ID or FOLDER_ID>
