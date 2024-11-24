@@ -3,24 +3,38 @@
 ## Overview
 This guide will show you how to view the Google Cloud Resource Tree in your Organization.
 
-**Time to complete**: <walkthrough-tutorial-duration duration="3"></walkthrough-tutorial-duration>
+**Time to complete**: <walkthrough-tutorial-duration duration="5"></walkthrough-tutorial-duration>
 
 **Prerequisites**: 
-- **Google Cloud Asset Inventory API**: Enable it for your project.
-   - [Enable the API](https://console.cloud.google.com/apis/library/cloudasset.googleapis.com)
-- **Permissions**: Ensure your Google Cloud account has the necessary roles:
-   - `roles/resourcemanager.organizationViewer`
-   - `roles/resourcemanager.folderViewer`
-   - `roles/resourcemanager.projectViewer`
+Before starting, ensure the following:
 
-Click the **Start** button to move to the first step.
+1. **Enable the Google Cloud Asset Inventory API**:  
+   Click the button below to enable it for your project:  
+   <walkthrough-enable-apis apis="cloudasset.googleapis.com"></walkthrough-enable-apis>
+
+2. **IAM Permissions**:  
+   Verify your account has the necessary roles:  
+   - `roles/resourcemanager.organizationViewer`  
+   - `roles/resourcemanager.folderViewer`  
+   - `roles/resourcemanager.projectViewer`  
+
+   If you don't have these roles, click below to open the IAM page and grant them:  
+   [Open IAM Page](https://console.cloud.google.com/iam-admin/iam)
+
+Click the **Start** button to proceed.
 
 ## View the Resource Tree
 Execute the gcptree.sh script
 
-### Set the Resource ID (Organization ID or Folder ID), where you want to see the child resources
+**Set the Resource ID**:  
+   The `RESOURCE_ID` should be either:  
+   - Your **Organization ID**: `123456789012` (without the 'organizations/' prefix)
+   - A **Folder ID**: `345678901234` (without the 'folders/' prefix)
+
+Run the following command to define the resource ID:
+
 ```bash
-RESOURCE_ID=
+RESOURCE_ID= # Replace with your Organization or Folder ID
 ```
 
 ### Execute the gcptree.sh script
@@ -28,13 +42,14 @@ RESOURCE_ID=
 ./gcptree.sh $RESOURCE_ID
 ```
 
-Click the **Next** button to move to the next step.
+Click **Next** to proceed.
 
-## Congratulations
+## Congratulations!
+
 <walkthrough-conclusion-trophy></walkthrough-conclusion-trophy>
 
-You're all set!
+You're all set! 🎉  
 
-You can now see your Google Cloud Resource Tree.
-
-Done!
+You’ve successfully displayed your Google Cloud Resource Tree. If you encounter any issues, double-check the following:  
+- **API is enabled**  
+- **IAM roles are correctly assigned**  
