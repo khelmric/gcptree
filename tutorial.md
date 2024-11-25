@@ -9,6 +9,9 @@ This guide will show you how to view the Google Cloud Resource Tree in your Orga
 Before starting, ensure the following:
 
 1. **Enable the Google Cloud Asset Inventory API**:  
+   Select your project: 
+   <walkthrough-project-setup></walkthrough-project-setup>
+
    Click the button below to enable it for your project:  
    <walkthrough-enable-apis apis="cloudasset.googleapis.com"></walkthrough-enable-apis>
 
