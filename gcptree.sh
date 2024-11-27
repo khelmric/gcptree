@@ -75,7 +75,7 @@ function print_tree() {
             else
                 echo "$3├── 📁 ${NAME} (${ID})"
                 # Recurse for child folders
-                print_tree "$1" $LEVEL "$3|   " "$ID" "folder"
+                print_tree "$1" $LEVEL "$3│   " "$ID" "folder"
             fi
         done <<< "$RESULT"
     fi
