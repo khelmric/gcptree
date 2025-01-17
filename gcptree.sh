@@ -179,8 +179,7 @@ if [[ "$SCOPE" == organizations/* ]]; then
     echo "🌐 $ORG_NAME ($STARTING_ID)"
     fetch_hierarchy "$SCOPE" "organization"
 elif [[ "$SCOPE" == folders/* ]]; then
-    echo "🌐"
     FOLDER_NAME=$(gcloud resource-manager folders describe $STARTING_ID --format="value(displayName)")
-    echo "└── 📁 $FOLDER_NAME ($STARTING_ID)"
+    echo "📁 $FOLDER_NAME ($STARTING_ID)"
     fetch_hierarchy "$SCOPE" "folder"
 fi
