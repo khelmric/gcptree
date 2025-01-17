@@ -24,6 +24,7 @@ else
     echo "$INSTALL_DIR/bin is already in your PATH."
 fi
 
+echo ""
 echo "Installation complete. You can now use the 'gcptree' command."
 echo ""
 echo "gcptree <ORGANIZATION_ID OR FOLDER_ID> [-v]"

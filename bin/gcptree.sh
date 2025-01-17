@@ -2,7 +2,7 @@
 
 # Check if an argument is provided
 if [ -z "$1" ]; then
-    echo "Usage: $0 <ORGANIZATION_ID or FOLDER_ID> [-v]"
+    echo "Usage: gcptree <ORGANIZATION_ID or FOLDER_ID> [-v]"
     exit 1
 fi
 
