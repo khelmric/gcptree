@@ -28,6 +28,15 @@ This script generates a visual representation of Google Cloud resources (Organiz
 
 ## Installation
 
+### Oneliner
+
+1. Run the install script:
+   ```bash
+   curl -s https://raw.githubusercontent.com/khelmric/gcptree/refs/heads/cli-app/install.sh | bash
+   ```
+
+### Manual
+
 1. Clone or download this repository:
     ```bash
     git clone https://github.com/khelmric/gcptree.git
