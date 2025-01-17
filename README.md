@@ -94,8 +94,7 @@ Output:</br>
 WITHOUT the -v verbose flag
 ```
 Google Cloud Resource Tree
-🌐
-└── 📁 Folder X (folders/987654321098)
+📁 Folder X (folders/987654321098)
     ├── 📁 Subfolder Y (folders/222)
     │   └── 📦 Project Y1 
     └── 📦 Project X1
@@ -103,8 +102,7 @@ Google Cloud Resource Tree
 WITH the -v verbose flag
 ```
 Google Cloud Resource Tree
-🌐
-└── 📁 Folder X (folders/987654321098)
+📁 Folder X (folders/987654321098)
     ├── 📁 Subfolder Y (folders/222)
     │   └── 📦 Project Y1 (projects/777)
     └── 📦 Project X1 (projects/888)
