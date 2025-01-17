@@ -2,11 +2,19 @@
 
 # Check if an argument is provided
 if [ -z "$1" ]; then
-    echo "Usage: $0 <ORGANIZATION_ID or FOLDER_ID>"
+    echo "Usage: $0 <ORGANIZATION_ID or FOLDER_ID> [-v]"
     exit 1
 fi
 
 STARTING_ID=$1
+VERBOSE=false
+
+# Check for the verbose flag as the last argument
+if [[ "${@: -1}" == "-v" ]]; then
+    VERBOSE=true
+    # Remove the verbose flag from the arguments
+    set -- "${@:1:$(($#-1))}"
+fi
 
 # Function to determine the type of the starting ID (organization or folder)
 function get_resource_id() {
@@ -35,7 +43,7 @@ SCOPE=$(get_resource_id)
 function print_tree() {
     local LEVEL
     let "LEVEL = $2 + 1"
-    # PROJECTS
+    # FOLDERS
     if [[ "$5" == *organization* ]]; then
         # PARENT=ORGANIZATION
         RESULT=$(echo "$1" | jq -r \
@@ -69,11 +77,19 @@ function print_tree() {
 
             # Check if this is the last iteration
             if [[ $current_line -eq $total_lines ]]; then
-                echo "$3└── 📁 ${NAME} (${ID})"
+                if [ "$VERBOSE" = true ]; then
+                    echo "$3└── 📁 ${NAME} (${ID})"
+                else
+                    echo "$3└── 📁 ${NAME}"
+                fi
                 # Recurse for child folders
                 print_tree "$1" $LEVEL "$3    " "$ID" "folder"
             else
-                echo "$3├── 📁 ${NAME} (${ID})"
+                if [ "$VERBOSE" = true ]; then
+                    echo "$3├── 📁 ${NAME} (${ID})"
+                else
+                    echo "$3├── 📁 ${NAME}"
+                fi
                 # Recurse for child folders
                 print_tree "$1" $LEVEL "$3│   " "$ID" "folder"
             fi
@@ -113,9 +129,17 @@ function print_tree() {
 
             # Check if this is the last iteration
             if [[ $current_line -eq $total_lines ]]; then
-                echo "$3└── 📦 ${NAME} (${ID})"
+                if [ "$VERBOSE" = true ]; then
+                    echo "$3└── 📦 ${NAME} (${ID})"
+                else
+                    echo "$3└── 📦 ${NAME}"
+                fi
             else
-                echo "$3├── 📦 ${NAME} (${ID})"
+                if [ "$VERBOSE" = true ]; then
+                    echo "$3├── 📦 ${NAME} (${ID})"
+                else
+                    echo "$3├── 📦 ${NAME}"
+                fi
             fi
         done <<< "$RESULT"
     fi
@@ -142,19 +166,20 @@ function fetch_hierarchy() {
     # Find the minimum number of parents
     LEVEL=$(echo "$ASSET_DATA" | jq '[.[] | .parents | length] | min')
 
-    print_tree "$ASSET_DATA" $LEVEL "    " "$STARTING_ID" "$PARENT_TYPE"
+    print_tree "$ASSET_DATA" $LEVEL "" "$STARTING_ID" "$PARENT_TYPE"
 
 }
 
 # Start fetching the hierarchy
+echo""
 echo "Google Cloud Resource Tree"
-echo "."
+echo""
 if [[ "$SCOPE" == organizations/* ]]; then
     ORG_NAME=$(gcloud organizations describe $STARTING_ID --format="value(displayName)")
-    echo "└── 🌐 $ORG_NAME ($STARTING_ID)"
+    echo "🌐 $ORG_NAME ($STARTING_ID)"
     fetch_hierarchy "$SCOPE" "organization"
 elif [[ "$SCOPE" == folders/* ]]; then
     FOLDER_NAME=$(gcloud resource-manager folders describe $STARTING_ID --format="value(displayName)")
-    echo "├── 📁 $FOLDER_NAME ($STARTING_ID)"
+    echo "📁 $FOLDER_NAME ($STARTING_ID)"
     fetch_hierarchy "$SCOPE" "folder"
 fi
