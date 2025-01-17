@@ -44,12 +44,15 @@ This script generates a visual representation of Google Cloud resources (Organiz
 
 ### Basic Syntax
 ```bash
-./gcptree.sh <ORGANIZATION_ID or FOLDER_ID>
+./gcptree.sh <ORGANIZATION_ID or FOLDER_ID> [-v]
 ```
 
 ### Required Argument
 - <ORGANIZATION_ID>: The unique numeric identifier of your Google Cloud Organization.
 - <FOLDER_ID>: The unique numeric identifier of a Google Cloud Folder.
+
+### Optional Argument
+- [-v]: Verbose flag, by default it prints only the NAMES, with this flag it print the IDs as well for the projects (usually both name and ID are too long and does not fit in the terminal, breaks the structure).
 
 ### Examples
 
@@ -60,11 +63,20 @@ Replace 123456789012 with your Organization ID.
 ./gcptree.sh 123456789012
 ```
 
-Output:
+Output:</br>
+WITHOUT the -v verbose flag
 ```
 Google Cloud Resource Tree
-.
-└── 🌐 My Organization (123456789012)
+🌐 My Organization (123456789012)
+    ├── 📁 Folder A (folders/111)
+    │   ├── 📦 Project A1 
+    │   └── 📦 Project A2 
+    └── 📦 Project B
+```
+WITH the -v verbose flag
+```
+Google Cloud Resource Tree
+🌐 My Organization (123456789012)
     ├── 📁 Folder A (folders/111)
     │   ├── 📦 Project A1 (projects/333)
     │   └── 📦 Project A2 (projects/444)
@@ -78,10 +90,20 @@ Replace 987654321098 with your Folder ID.
 ./gcptree.sh 987654321098
 ```
 
-Output:
+Output:</br>
+WITHOUT the -v verbose flag
 ```
 Google Cloud Resource Tree
-.
+🌐
+└── 📁 Folder X (folders/987654321098)
+    ├── 📁 Subfolder Y (folders/222)
+    │   └── 📦 Project Y1 
+    └── 📦 Project X1
+```
+WITH the -v verbose flag
+```
+Google Cloud Resource Tree
+🌐
 └── 📁 Folder X (folders/987654321098)
     ├── 📁 Subfolder Y (folders/222)
     │   └── 📦 Project Y1 (projects/777)
